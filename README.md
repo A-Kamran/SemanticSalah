@@ -8,7 +8,10 @@ Web server available [here](http://).
 ## The Semantic Salah Ontology
 Have a look at the [documentation](https://a-kamran.github.io/SemanticSalah/) .
 
+Default Dataset Name (Graph IRI): http://www.semanticsalah.com/ontology/
+
 ## SPARQL Endpoint available at
+
 
 <!-- GraphDB
 http://115.186.60.94:7200/.
@@ -17,14 +20,14 @@ For Sparql:
 http://115.186.60.94:7200/sparql
 -->
 
-OpenLink Virtuoso
+<!-- OpenLink Virtuoso
 <!-- http://semantichadith.com:8890/sparql/ (Faceted Browsing is also enabled)  -->
 
-Default Dataset Name (Graph IRI): http://www.semanticsalah.com/ontology/
 
+<!--
 ## Faceted Browsing
 
-<!-- Faceted Search at: http://semantichadith.com:8890/fct/
+ Faceted Search at: http://semantichadith.com:8890/fct/
 
 For faceted Query Results: 
 Select the option (HTML (Faceted Browsing Links)) from the drop-down menu for Results Format, before executing the query.
