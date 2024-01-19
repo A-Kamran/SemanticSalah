@@ -1,16 +1,14 @@
 # The Semantic Salah Ontology and Knowledge Graph
 
-The knowledge graph and ontology are hosted on [figshare]().
 
-
-Web server available [here](http://). 
+<!-- Web server available [here](http://). -->
 
 ## The Semantic Salah Ontology
 Have a look at the [documentation](https://a-kamran.github.io/SemanticSalah/) .
 
 Default Dataset Name (Graph IRI): http://www.semanticsalah.com/ontology/
 
-## SPARQL Endpoint available at
+<!-- ## SPARQL Endpoint available at -->
 
 
 <!-- GraphDB
