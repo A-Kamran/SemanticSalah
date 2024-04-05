@@ -15,7 +15,7 @@ Semantic Salah Ontology , version 1.0.1
 <https://github.com/A-Kamran/SemanticSalah/blob/main/SemanticSalahOntology.owl)>
 
 5. **Ontology repository (MUST)**
-<https://github.com/A-Kamran/SemanticHadithKG>
+<https://github.com/A-Kamran/SemanticSalah>
 
 6. **Methodological framework (MUST)**
 The Semantic Salah Ontology is a formal knowledge model designed to encapsulate the components of Salah, ranging from the foundational prayer units (rakahs) to the temporal considerations governing the timing of Salah.
@@ -81,7 +81,7 @@ All entities have an dcterms:description natural language explanation
 See point E.4.
 
 10. **Ontology relationships (MUST)**
-27 object properties; 43 datatype properties.
+22 object properties; 12 datatype properties.
 
 11. **Axiom pattern (MUST)**
 <!-- 
@@ -106,10 +106,10 @@ The Semantic Hadith ontology adopts sequence-based identifiers for its versions 
 Tests have been made by checking competency questions in the paper. The Competency Questions with their Sparql Queries and results are available [here](https://github.com/A-Kamran/SemanticSalah/blob/main/Competency%20Questions%20and%20SPARQL%20Queries.md).
 
 2. **Evaluation (MUST)**
-Metrics, and discussions over Semantic Hadith ontology evaluation have been discussed in the paper.
+Metrics, and discussions over Semantic Salah ontology evaluation have been discussed in the paper.
 
 3. **Examples of use (MUST)**
-At the moment, only theoretical examples of usage in the presentation paper.
+The study's outcomes are practically implemented through the \textit{SmartSalahApp}, which offers users personalised feedback on the quality, completeness, and correctness of their Salah practices. This application aims to empower users with real-time insights and guidance.
 
 4. **Institutional endorsement (OPTIONAL)**
 None
