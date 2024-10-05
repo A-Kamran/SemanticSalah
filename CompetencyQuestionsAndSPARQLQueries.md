@@ -94,14 +94,15 @@ GROUP BY ?rakahUnit ?postureName  # Groups results by Rakah and posture name
 HAVING (COUNT(?posture) > 1)  # Filters postures that occur more than once in a Rakah
 ORDER BY ?rakahUnit ?postureName
 ```
-### Competency Question 6:
+<!-- ### Competency Question 6:
 **Question:** What actions or conditions constitute an incomplete Salah?
 
 **SPARQL Query:**
 ```
-
 ```
-### Competency Question 7:
+-->
+
+### Competency Question 6:
 **Question:** How does the duration of each Salah posture vary?
 
 **SPARQL Query:**
@@ -128,7 +129,7 @@ WHERE {
 ORDER BY ?rakah ?postureName
 
 ```
-### Competency Question 8:
+### Competency Question 7:
 **Question:** Is Salah completed within the prescribed time?
 
 **SPARQL Query:**
