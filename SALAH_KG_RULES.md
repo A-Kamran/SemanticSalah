@@ -1,6 +1,6 @@
 # Salah KG Rule Catalog
 
-Exhaustive reusable catalog extracted from the supplied LaTeX. Formal rules are retained alongside a best-effort normalized view intended for documentation, review, and downstream KG-generation code.
+Exhaustive reusable catalog of Formal rules - retained alongside a best-effort normalized view intended for documentation, review, and downstream KG-generation code.
 
 ## Inventory
 
@@ -13,10 +13,10 @@ Exhaustive reusable catalog extracted from the supplied LaTeX. Formal rules are 
 - **swrl missed rakah rules:** 3
 - **swrl extra rakah rules:** 3
 
-## Applied corrections
+<!-- ## Applied corrections
 
 - **TwoUnitRakah2 / Scenario 5** — Replaced duplicated Scenario 5 with Qayam → Ruku → Qoum → Sajda → Jalsa → Sajda → Tashahud.
-- **TwoUnitExtraRakah1** — Changed consequent from hasMissedRakah(?count, Count1) to hasExtraRakah(?count, Count1).
+- **TwoUnitExtraRakah1** — Changed consequent from hasMissedRakah(?count, Count1) to hasExtraRakah(?count, Count1). -->
 
 ## 1. OWL-style equivalent-class rules
 
@@ -45,7 +45,10 @@ equivalent_to = [hasUnitRakahCount.value(2)]
 #### `FourUnit_Rakah1`
 **Normalized view:** Qayam → Ruku → Qoum → Sajda → Jalsa → Sajda; belongs to FourSalahUnit; rakah number 1.
 ```text
-equivalent_to = [Contains.some(Qayam & followedBy.some(Ruku & followedBy.some(Qoum & followedBy.some(Sajda & followedBy.some(Jalsa & followedBy.some(Sajda)))))) & (belongsToUnit.some(FourSalahUnit) & hasRakahNumber.value(1))]
+equivalent_to =
+[Contains.some(Qayam & followedBy.some(Ruku & followedBy.some(Qoum & followedBy.some(Sajda &
+followedBy.some(Jalsa & followedBy.some(Sajda)))))) & (belongsToUnit.some(FourSalahUnit) &
+hasRakahNumber.value(1))]
 ```
 
 #### `FourUnit_Rakah2`
