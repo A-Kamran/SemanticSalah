@@ -1,0 +1,5 @@
+pandas
+rdflib
+# optional
+requests      # prayer-time windows for new prayers (aladhan.com API)
+owlready2     # reasoner step (also needs Java)
