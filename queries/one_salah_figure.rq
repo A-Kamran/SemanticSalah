@@ -1,0 +1,61 @@
+# One recorded prayer (here S3, a Fajr with two rakahs) as a small subgraph, for a figure.
+# Change :S3 in the VALUES line to draw another prayer, for example :S14 (an incomplete unit).
+# Labels are generated, so a graph viewer (GraphDB visual graph, Gephi, ...) shows readable names.
+# The optional "inferred" lines only return something if SalahKG_inferred_types.rdf is loaded
+# into the same repository (or a reasoner has inferred them); otherwise they are simply empty.
+
+PREFIX :     <http://www.semanticsalah.com/ontology/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+  ?person   :performs ?salah ;
+            rdfs:label ?personLabel .
+  ?salah    :hasSalahUnit ?unit ;
+            rdfs:label ?salahLabel ;
+            a ?salahInferred .
+  ?unit     :containsRakah ?rakah ;
+            rdfs:label ?unitLabel ;
+            a ?unitInferred .
+  ?rakah    :containsPosture ?posture ;
+            :rakahFollowedByRakah ?nextRakah ;
+            rdfs:label ?rakahLabel ;
+            a ?rakahInferred .
+  ?posture  :followedBy ?nextPosture ;
+            rdfs:label ?postureLabel .
+  # To also draw the posture types as nodes (six shared nodes, which makes the figure busier), add:
+  # ?posture :hasPostureType ?ptype .
+}
+WHERE {
+  VALUES ?salah { :S3 }
+
+  ?salah  :hasSalahUnit ?unit .
+  ?unit   :hasSalahUnitType ?unitType ;
+          :hasUnitRakahCount ?prescribed ;
+          :hasRecordedRakahCount ?recorded ;
+          :containsRakah ?rakah .
+  ?rakah  :hasRakahNumber ?num ;
+          :hasPostureCount ?count ;
+          :containsPosture ?posture .
+  ?posture :hasPostureType ?ptype .
+
+  OPTIONAL { ?person :performs ?salah }
+  OPTIONAL { ?salah  :hasSalahType ?salahType }
+  OPTIONAL { ?rakah  :rakahFollowedByRakah ?nextRakah }
+  OPTIONAL { ?posture :followedBy ?nextPosture }
+
+  # inferred classes (only present when the inferences are loaded)
+  OPTIONAL { ?salah ?isA1 ?salahInferred
+             FILTER(?isA1 = rdf:type && ?salahInferred IN (:ObligatorySalah, :NonObligatorySalah)) }
+  OPTIONAL { ?unit ?isA2 ?unitInferred
+             FILTER(?isA2 = rdf:type && ?unitInferred IN (:TwoSalahUnit, :ThreeSalahUnit, :FourSalahUnit, :IncompleteSalahUnit)) }
+  OPTIONAL { ?rakah ?isA3 ?rakahInferred
+             FILTER(?isA3 = rdf:type && REGEX(STR(?rakahInferred), "/(Completed|Incompleted)(Two|Three|Four)UnitRakah[0-9]$|/(Complete|InComplete)Rakah$")) }
+
+  # readable labels
+  BIND(REPLACE(STR(?person), "^.*/", "") AS ?personLabel)
+  BIND(CONCAT(REPLACE(STR(?salah), "^.*/", ""), " (", COALESCE(REPLACE(STR(?salahType), "^.*/", ""), "prayer"), ")") AS ?salahLabel)
+  BIND(CONCAT(REPLACE(STR(?unitType), "^.*/", ""), " unit: ", STR(?recorded), " of ", STR(?prescribed), " rakahs") AS ?unitLabel)
+  BIND(CONCAT("Rakah ", STR(?num), " (", STR(?count), " postures)") AS ?rakahLabel)
+  BIND(CONCAT(REPLACE(STR(?posture), "^.*_P", ""), " ", REPLACE(REPLACE(STR(?ptype), "^.*/", ""), "Type$", "")) AS ?postureLabel)
+}
