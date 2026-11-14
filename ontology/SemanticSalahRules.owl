@@ -1,0 +1,844 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticsalah.com/rules#"
+     xml:base="http://www.semanticsalah.com/rules"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:ontology="http://www.semanticsalah.com/ontology/">
+  <owl:Ontology rdf:about="http://www.semanticsalah.com/rules">
+    <owl:imports rdf:resource="http://www.semanticsalah.com"/>
+    <terms:title>The Semantic Salah Ontology: diagnosis rules (SWRL)</terms:title>
+    <terms:creator>Amna Binte Kamran</terms:creator>
+    <terms:creator>Amna Basharat</terms:creator>
+    <terms:license>https://creativecommons.org/licenses/by-sa/4.0/</terms:license>
+    <terms:description xml:lang="en">Optional module that imports the core Semantic Salah ontology. It holds 35 SWRL rules that DIAGNOSE what was missed or added in an incomplete Salah: 29 rules that infer a missed posture (hasMissedPosture), 3 that infer a missed rakah (hasMissedRakah) and 3 that infer an extra rakah (hasExtraRakah). The classification of complete and incomplete rakahs is not in this module: it is in the core ontology as OWL definitions. The 9 catalog rules that map raw posture names to posture types are not included: the knowledge-graph generator assigns the posture types directly.</terms:description>
+  </owl:Ontology>
+  <!-- values used by the missed-rakah and extra-rakah rules (not part of the core ontology) -->
+  <owl:NamedIndividual rdf:about="http://www.semanticsalah.com/ontology/RakahTwo"><rdfs:label xml:lang="en">Rakah two</rdfs:label></owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticsalah.com/ontology/RakahThree"><rdfs:label xml:lang="en">Rakah three</rdfs:label></owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticsalah.com/ontology/Count1"><rdfs:label xml:lang="en">One (extra rakah count)</rdfs:label></owl:NamedIndividual>
+  <swrl:Variable rdf:about="urn:swrl#jalsa1"/>
+  <swrl:Variable rdf:about="urn:swrl#qayam1"/>
+  <swrl:Variable rdf:about="urn:swrl#qayam2"/>
+  <swrl:Variable rdf:about="urn:swrl#qoum1"/>
+  <swrl:Variable rdf:about="urn:swrl#r1"/>
+  <swrl:Variable rdf:about="urn:swrl#r2"/>
+  <swrl:Variable rdf:about="urn:swrl#r3"/>
+  <swrl:Variable rdf:about="urn:swrl#r4"/>
+  <swrl:Variable rdf:about="urn:swrl#r5"/>
+  <swrl:Variable rdf:about="urn:swrl#rakah"/>
+  <swrl:Variable rdf:about="urn:swrl#ruku1"/>
+  <swrl:Variable rdf:about="urn:swrl#sajda1"/>
+  <swrl:Variable rdf:about="urn:swrl#sajda2"/>
+  <swrl:Variable rdf:about="urn:swrl#su"/>
+  <swrl:Variable rdf:about="urn:swrl#tashahud1"/>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedSajda2Rakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Tashahud; unit type: TwoSalahUnit; rakah number 2; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedSajda2Rakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Qayam; unit type: TwoSalahUnit; rakah number 1; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedRukuRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Tashahud; unit type: TwoSalahUnit; rakah number 2; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedRukuRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: TwoSalahUnit; rakah number 1; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedQoumRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Tashahud; unit type: TwoSalahUnit; rakah number 2; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitMissedQoumRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Qayam; unit type: TwoSalahUnit; rakah number 1; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TwoSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedTashahudRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: ThreeSalahUnit; rakah number 2; infer missed posture TashahudType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/TashahudType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedSajdaRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Tashahud; unit type: ThreeSalahUnit; rakah number 3; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedSajdaRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Tashahud; unit type: ThreeSalahUnit; rakah number 2; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedSajdaRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Qayam; unit type: ThreeSalahUnit; rakah number 1; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedRukuRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Tashahud; unit type: ThreeSalahUnit; rakah number 3; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedRukuRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Tashahud; unit type: ThreeSalahUnit; rakah number 2; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedRukuRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: ThreeSalahUnit; rakah number 1; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedQoumRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Tashahud; unit type: ThreeSalahUnit; rakah number 3; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedQoumRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Tashahud; unit type: ThreeSalahUnit; rakah number 2; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedQoumRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Qayam; unit type: ThreeSalahUnit; rakah number 1; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/ThreeSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedTashahudRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: FourSalahUnit; rakah number 2; infer missed posture TashahudType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/TashahudType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedSajdaRakah4</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Tashahud; unit type: FourSalahUnit; rakah number 4; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedSajdaRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Qayam; unit type: FourSalahUnit; rakah number 3; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedSajdaRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Tashahud; unit type: FourSalahUnit; rakah number 2; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedSajdaRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Qoum → Sajda → Jalsa → Qayam; unit type: FourSalahUnit; rakah number 1; infer missed posture SajdaType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/SajdaType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRukuRakah4</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Tashahud; unit type: FourSalahUnit; rakah number 4; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRukuRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: FourSalahUnit; rakah number 3; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRukuRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Tashahud; unit type: FourSalahUnit; rakah number 2; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRukuRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Qoum → Sajda → Jalsa → Sajda → Qayam; unit type: FourSalahUnit; rakah number 1; infer missed posture RukuType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#qoum1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QoumPosture"/><swrl:argument1 rdf:resource="urn:swrl#qoum1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RukuType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedQoumRakah4</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Tashahud; unit type: FourSalahUnit; rakah number 4; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedQoumRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Qayam; unit type: FourSalahUnit; rakah number 3; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedQoumRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Tashahud; unit type: FourSalahUnit; rakah number 2; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#tashahud1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/TashahudPosture"/><swrl:argument1 rdf:resource="urn:swrl#tashahud1"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedQoumRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Observed sequence: Qayam → Ruku → Sajda → Jalsa → Sajda → Qayam; unit type: FourSalahUnit; rakah number 1; infer missed posture QoumType. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/><swrl:argument2 rdf:resource="urn:swrl#qayam2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/><swrl:argument2 rdf:resource="urn:swrl#sajda2"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/><swrl:argument2 rdf:resource="urn:swrl#jalsa1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/><swrl:argument2 rdf:resource="urn:swrl#sajda1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/followedBy"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/><swrl:argument2 rdf:resource="urn:swrl#ruku1"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/RukuPosture"/><swrl:argument1 rdf:resource="urn:swrl#ruku1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/JalsaPosture"/><swrl:argument1 rdf:resource="urn:swrl#jalsa1"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SajdaPosture"/><swrl:argument1 rdf:resource="urn:swrl#sajda2"/></swrl:ClassAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/QayamPosture"/><swrl:argument1 rdf:resource="urn:swrl#qayam2"/></swrl:ClassAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#qayam1"/></swrl:IndividualPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/belongsToUnit"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="urn:swrl#su"/></swrl:IndividualPropertyAtom>
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/FourSalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedPosture"/><swrl:argument1 rdf:resource="urn:swrl#rakah"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/QoumType"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 4 rakahs; observed rakah-number chain 1 → 3 → 4; infer missing RakahTwo. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:resource="urn:swrl#r3"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RakahTwo"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitMissedRakah3</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 4 rakahs; observed rakah-number chain 1 → 2 → 4; infer missing RakahThree. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:resource="urn:swrl#r3"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RakahThree"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitMissedRakah2</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 3 rakahs; observed rakah-number chain 1 → 3; infer missing RakahTwo. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasMissedRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/RakahTwo"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>FourUnitExtraRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 4 rakahs; observed rakah-number chain 1 → 2 → 3 → 4 → 5; infer Count1 extra rakah. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:resource="urn:swrl#r3"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:resource="urn:swrl#r4"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r4"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r4"/><swrl:argument2 rdf:resource="urn:swrl#r5"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r5"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasExtraRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/Count1"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>ThreeUnitExtraRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 3 rakahs; observed rakah-number chain 1 → 2 → 3 → 4; infer Count1 extra rakah. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:resource="urn:swrl#r3"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:resource="urn:swrl#r4"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r4"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasExtraRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/Count1"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+  <swrl:Imp>
+    <rdfs:label>TwoUnitExtraRakah1</rdfs:label>
+    <rdfs:comment xml:lang="en">Rule catalog: Expected 2 rakahs; observed rakah-number chain 1 → 2 → 3; infer Count1 extra rakah. Correction note from the catalog: Corrected from hasMissedRakah(?count, Count1) because this rule belongs to Extra Rakah and detects a third rakah in a two-rakah Salah unit. Translation to the final vocabulary: Contains = containsPosture, consistsOfRakah = containsRakah, posture classes are the defined classes QayamPosture ... TashahudPosture; variables renamed for clarity (the rakah is ?rakah, the unit is ?su).</rdfs:comment>
+    <swrl:body rdf:parseType="Collection">
+      <swrl:ClassAtom><swrl:classPredicate rdf:resource="http://www.semanticsalah.com/ontology/SalahUnit"/><swrl:argument1 rdf:resource="urn:swrl#su"/></swrl:ClassAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasUnitRakahCount"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/containsRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="urn:swrl#r1"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r1"/><swrl:argument2 rdf:resource="urn:swrl#r2"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</swrl:argument2></swrl:DatavaluedPropertyAtom>
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/rakahFollowedByRakah"/><swrl:argument1 rdf:resource="urn:swrl#r2"/><swrl:argument2 rdf:resource="urn:swrl#r3"/></swrl:IndividualPropertyAtom>
+      <swrl:DatavaluedPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasRakahNumber"/><swrl:argument1 rdf:resource="urn:swrl#r3"/><swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</swrl:argument2></swrl:DatavaluedPropertyAtom>
+    </swrl:body>
+    <swrl:head rdf:parseType="Collection">
+      <swrl:IndividualPropertyAtom><swrl:propertyPredicate rdf:resource="http://www.semanticsalah.com/ontology/hasExtraRakah"/><swrl:argument1 rdf:resource="urn:swrl#su"/><swrl:argument2 rdf:resource="http://www.semanticsalah.com/ontology/Count1"/></swrl:IndividualPropertyAtom>
+    </swrl:head>
+  </swrl:Imp>
+</rdf:RDF>

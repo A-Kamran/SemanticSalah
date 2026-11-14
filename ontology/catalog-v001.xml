@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <!-- Keep this file in the same folder as the ontology files.
+         It tells Protege where to find the imported ontology on your computer. -->
+    <uri name="http://www.semanticsalah.com" uri="SemanticSalahOntology.owl"/>
+    <uri name="http://www.semanticsalah.com/1.0.0" uri="SemanticSalahOntology.owl"/>
+    <uri name="http://www.semanticstructuredactivity.com/ontology" uri="SemanticStructuredActivity.owl"/>
+    <uri name="http://www.semanticstructuredactivity.com/ontology/1.2.0" uri="SemanticStructuredActivity.owl"/>
+</catalog>

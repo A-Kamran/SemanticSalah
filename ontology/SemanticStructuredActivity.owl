@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticstructuredactivity.com/ontology/"
+     xml:base="http://www.semanticstructuredactivity.com/ontology/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:sosa="http://www.w3.org/ns/sosa/"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:dcterms="http://purl.org/dc/terms/"
+     xmlns:activity="http://www.semanticstructuredactivity.com/ontology/">
+    <owl:Ontology rdf:about="http://www.semanticstructuredactivity.com/ontology">
+        <owl:versionIRI rdf:resource="http://www.semanticstructuredactivity.com/ontology/1.2.0"/>
+        <dcterms:creator>Amna Binte Kamran</dcterms:creator>
+        <dcterms:description xml:lang="en">A lightweight core ontology for representing structured human activities, their components, ordering, observations, agents, and validation results.</dcterms:description>
+        <dcterms:license>https://creativecommons.org/licenses/by-sa/4.0/</dcterms:license>
+        <dcterms:title xml:lang="en">SemanticStructuredActivity Ontology</dcterms:title>
+        <vann:preferredNamespacePrefix>activity</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri>http://www.semanticstructuredactivity.com/ontology/</vann:preferredNamespaceUri>
+        <owl:versionInfo>1.2.0</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/directlyPrecedes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/directlyPrecedes">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticstructuredactivity.com/ontology/precedes"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:range rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">Indicates that one activity component occurs immediately before another. Declared irreflexive and asymmetric (legal here because, unlike its transitive super-property &quot;precedes&quot;, this property is not itself transitive) so that a component cannot immediately precede itself or form a mutual pair with another component.</rdfs:comment>
+        <rdfs:label xml:lang="en">directly precedes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasComponent">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">Relates a structured activity or activity component to any directly or indirectly contained activity component.</rdfs:comment>
+        <rdfs:label xml:lang="en">has component</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasDirectComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasDirectComponent">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticstructuredactivity.com/ontology/hasComponent"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">Relates a structured activity or activity component to one of its immediate components. Declared irreflexive and asymmetric (legal here because, unlike its transitive super-property &quot;hasComponent&quot;, this property is not itself transitive) so that nothing can be its own direct component and containment cannot run in both directions between the same two individuals.</rdfs:comment>
+        <rdfs:label xml:lang="en">has direct component</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasValidationResult -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasValidationResult">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/sosa/hasResult"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+                    <rdf:Description rdf:about="http://www.w3.org/ns/sosa/Observation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticstructuredactivity.com/ontology/ValidationResult"/>
+        <rdfs:comment xml:lang="en">Relates an activity, component, or observation to a semantic validation result.</rdfs:comment>
+        <rdfs:label xml:lang="en">has validation result</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/precedes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/precedes">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:range rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">Indicates that one activity component occurs before another.</rdfs:comment>
+        <rdfs:label xml:lang="en">precedes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasAssociatedWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasAssociatedWith"/>
+    
+
+
+    <!-- http://www.w3.org/ns/sosa/hasFeatureOfInterest -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasFeatureOfInterest"/>
+    
+
+
+    <!-- http://www.w3.org/ns/sosa/hasResult -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sosa/hasResult"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasConfidenceValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasConfidenceValue">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">has confidence value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasEndTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasEndTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label xml:lang="en">has end time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasSequencePosition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasSequencePosition">
+        <rdfs:domain rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+        <rdfs:label xml:lang="en">has sequence position</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasStartTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasStartTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label xml:lang="en">has start time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/hasValidationMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticstructuredactivity.com/ontology/hasValidationMessage">
+        <rdfs:domain rdf:resource="http://www.semanticstructuredactivity.com/ontology/ValidationResult"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">has validation message</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/Action -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/Action">
+        <rdfs:subClassOf rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">A meaningful action occurring as part of a structured activity.</rdfs:comment>
+        <rdfs:label xml:lang="en">Action</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/ActivityComponent -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityComponent">
+        <owl:disjointWith rdf:resource="http://www.semanticstructuredactivity.com/ontology/StructuredActivity"/>
+        <rdfs:comment xml:lang="en">A constituent element of a structured activity or of another activity component.</rdfs:comment>
+        <rdfs:label xml:lang="en">Activity component</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/ActivitySegment -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivitySegment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">A major component or separately identifiable segment of a structured activity.</rdfs:comment>
+        <rdfs:label xml:lang="en">Activity segment</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/ActivityUnit -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityUnit">
+        <rdfs:subClassOf rdf:resource="http://www.semanticstructuredactivity.com/ontology/ActivityComponent"/>
+        <rdfs:comment xml:lang="en">A constituent unit within an activity segment or another activity component.</rdfs:comment>
+        <rdfs:label xml:lang="en">Activity unit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/StructuredActivity -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/StructuredActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:comment xml:lang="en">A human activity whose internal composition or ordering can be represented explicitly.</rdfs:comment>
+        <rdfs:label xml:lang="en">Structured activity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticstructuredactivity.com/ontology/ValidationResult -->
+
+    <owl:Class rdf:about="http://www.semanticstructuredactivity.com/ontology/ValidationResult">
+        <rdfs:comment xml:lang="en">The outcome of validating an activity, activity component, or observation.</rdfs:comment>
+        <rdfs:label xml:lang="en">Validation result</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Activity -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Activity"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Agent -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Agent"/>
+    
+
+
+    <!-- http://www.w3.org/ns/sosa/Observation -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/sosa/Observation"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/Action"/>
+            <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivitySegment"/>
+            <rdf:Description rdf:about="http://www.semanticstructuredactivity.com/ontology/ActivityUnit"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
